@@ -1,0 +1,1439 @@
+\documentclass[12pt,a4paper,openright,twoside]{report}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{newlfont}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{nicefrac}
+\usepackage{epstopdf}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows}
+\oddsidemargin=30pt
+\evensidemargin=20pt
+\hyphenation{Po-ten-zia-le}
+
+\textheight = 24.0cm
+\voffset=-1.5cm
+
+\theoremstyle{definition} %non in corsivo
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+
+
+\pagestyle{fancy}\addtolength{\headwidth}{61pt}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection \ #1}{}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]{\fancyplain{}{\bfseries\thepage}}
+\cfoot{}
+\linespread{1,3}
+
+%%%%%%%%%%%%%%%%%%%%%NUOVI COMANDI
+\def \R {\mathbb{R}}
+\def \C {\mathbb{C}}
+\def \N {\mathbb{N}}
+\def \Z {\mathbb{Z}}
+\def \d {\mathrm{d}}
+\def \de {\partial}
+\def \LL {\mathcal{L}}
+\def \P {\mathbb{P}}
+\def \PP {\mathbb{P}^1(\C)}
+\def \A {\mathcal{A}}
+\def \ZZ {\mathcal{Z}}
+\def \H {\mathfrak{H}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\textwidth=450pt\oddsidemargin=0pt
+\begin{document}
+	\begin{titlepage}
+		\begin{center}
+			{{\Large{\textsc{Alma Mater Studiorum $\cdot$ Universit\'a di
+							Bologna}}}} \rule[0.1cm]{15.8cm}{0.1mm}
+			\rule[0.5cm]{15.8cm}{0.6mm}
+			{\small{\bf SCUOLA DI SCIENZE\\
+					Corso di Laurea in Matematica}}
+		\end{center}
+		\vspace{15mm}
+		\begin{center}
+			\vspace{3mm}
+			{\LARGE{\bf Hurwitz Theory: \bigskip \\
+                         From Representations\\[0.8cm]
+                          to Tropical Geometry}}\\
+			\vspace{1mm}
+			\vspace{28mm} {\large{\bf Tesi di Laurea in Geometria Algebrica}}
+		\end{center}
+		\vspace{50mm}
+		\par
+		\noindent
+		\begin{minipage}[t]{0.47\textwidth}
+			{\large{\bf Relatore:\\
+					Luca Battistella}}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{0.47\textwidth}\raggedleft
+			{\large{\bf Presentata da:\\
+					Angelo Cappelletti}}
+		\end{minipage}
+		\vspace{17mm}
+		\begin{center}
+			{\large{\bf Anno Accademico 2023/2024}}
+		\end{center}
+	\end{titlepage}
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+	
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\clearpage{\pagestyle{empty}\cleardoublepage}
+\begin{titlepage}
+	\topmargin=6.5cm
+	\raggedleft
+	\large
+	\em
+	\textit{Non mi rassegno alla vita senza lotta}\\
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+\end{titlepage}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{roman}
+\chapter*{Introduzione}
+	\rhead[\fancyplain{}{\bfseries INTRODUZIONE}]{\fancyplain{}{\bfseries\thepage}}
+	\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries INTRODUZIONE}}
+	\addcontentsline{toc}{chapter}{Introduzione}
+	\captionsetup[figure]{width=0.7\linewidth,labelfont=bf,textfont=it}
+
+
+    ''How many maps between Riemann surfaces exist once all discrete invariants are fixed''
+
+    This question was first posed by the German mathematician Adolf Hurwitz toward the end of the 19th century, giving rise to what is now known as Hurwitz theory.
+    In recent years, connections between Hurwitz theory and various areas of mathematics have been discovered, including combinatorics, algebraic geometry, representation theory, topology, differential equations, and even physics.
+    
+    This thesis provides an introduction to Hurwitz theory, presenting the necessary tools to understand the topics discussed.
+    
+    The first chapter introduces the foundations of the theory of Riemann surfaces, including the Riemann–Hurwitz theorem, which establishes a relation between discrete invariants and consequently provides a necessary condition for the existence of a holomorphic map between Riemann surfaces. This theorem may be regarded as the first result in Hurwitz theory.
+    
+    The second chapter defines Hurwitz numbers, which constitute the main subject of the thesis. Covering space theory is reviewed, with particular emphasis on monodromy. The Riemann existence theorem is stated and proved, establishing a connection between the theory of topological coverings and that of holomorphic maps, thereby allowing the extension of monodromy to the latter. Finally, the first examples of Hurwitz numbers are presented.
+    
+    The third chapter discusses, without going too deeply into details or proving every result, the representation theory of finite groups, especially that of the symmetric group. A connection between representation theory and Hurwitz theory is established by translating the problem of counting Hurwitz numbers into a multiplication problem in the class algebra \(\ZZ \C[S_d]\). Thanks to Maschke's theorem, which provides an orthogonal idempotent basis for \(\ZZ \C[S_d]\), one obtains Burnside’s formula, expressing Hurwitz numbers in terms of the characters of the irreducible representations of the symmetric group. As illustrated in the examples, Burnside’s formula provides a concrete yet computationally intensive method for computing Hurwitz numbers.
+    
+    The Hurwitz potential is briefly introduced: a generating function whose coefficients are Hurwitz numbers. This allows one to establish a relation between connected and disconnected Hurwitz numbers and provides a recursion formula for simple Hurwitz numbers in the form of a differential equation.
+    
+    Degeneration formulas are then discussed, providing recursive procedures that reduce a Hurwitz number to others with smaller discrete data. It follows that, in order to determine all Hurwitz numbers, it suffices to know those whose target curve is \(\PP\) with three branch points.
+    
+    The final topic addressed in the third chapter is tropical Hurwitz theory, introduced by Renzo Cavalieri, Paul Johnson, and Hannah Markwig in their 2010 paper \cite{CJM10}. The fundamental result in this setting is the correspondence between classical and tropical Hurwitz theory.
+
+	
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+	\tableofcontents                        
+	\rhead[\fancyplain{}{\bfseries\leftmark}]{\fancyplain{}{\bfseries\thepage}}
+	\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries
+			INDICE}}
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%FIRST CHAPTER
+\chapter{Riemann Surfaces}\label{chap:RiemannSurfaces}
+\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
+
+\pagenumbering{arabic}
+
+In this chapter, we present the classical definitions and theorems concerning Riemann surfaces theory, which will serve as foundational knowledge throughout the entirety of this thesis.
+
+\section{Definition of Riemann Surface}
+
+\begin{definition}[Topological Manifold]
+ A topological manifold X of dimension \(n\) is a topological space such that:
+ \begin{enumerate}
+     \item X is Hausdorff;
+     \item every connected component of X is second countable;
+     \item for every point in X there is a neighborhood \(U\) homeomorphic to an open subset of \(\R^n\).
+ \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Let \(X\) be a topological 2-manifold, we call complex chart a homeomorphism \( \phi : U \to V\)
+    where \(U \subseteq X\) and \(V \subseteq \C\) are open.
+    \begin{itemize}
+    \item Two complex charts are called compatible if the transition map
+    \[
+        T = \phi_1 \circ \phi_2^{-1} : \phi_2(U_1 \cap U_2) \to \phi_1(U_1 \cap U_2)
+    \]
+    is a holomorphic function.
+    \item A family of complex charts \( \A = \{\phi_{\alpha} : U_{\alpha} \to \C \}_{\alpha} \) such that
+    \( X = \bigcup_{\alpha} U_{\alpha}\) and the \(\phi_{\alpha}\) are pairwise compatible is called an atlas on \(X\).
+    \item Two atlases \(\A\) and \( \mathcal{B}\) are called equivalent if \( \A \cup \mathcal{B}\) is an atlas.
+    \item An equivalence class of complex atlases on \(X\) is called complex structure on \(X\).
+    \end{itemize}
+    
+\end{definition}
+
+\begin{definition}[Riemann Surface]
+    A Riemann surface is a pair \((X,\A)\), where \(X\) is a topological 2-manifold and \(\A\) a complex structure on \(X\).
+\end{definition}
+
+\begin{remark}
+    A Riemann surface \(X\) is also a real smooth 2-manifold. If we consider a transition map \(T\) this is holomorphic, so by the Cauchy-Riemann equations
+    \[
+        det(J_T) = u_x^2 + v_x^2 \geq 0.
+    \]
+    Therefore \(X\) is orientable.
+    
+    If \(X\) is compact, by the classification of topological surfaces, it is homeomorphic to a Sphere or to a connected sum of tori.
+\end{remark}
+
+ This justifies the following definition:
+
+\begin{definition}[Genus]
+    Let \(X\) be a compact Riemann surface, we call genus of \(X\) the number
+    \[
+        g(X)=\frac{2-\chi(X)}{2}   
+    \]
+    where \(\chi(X)\) is the Euler characteristic of \(X\).
+\end{definition}
+
+\begin{example}
+    Every open subset of \(\C\) is a Riemann surface with the identity function as a chart.
+    
+    The graph of a holomorphic function \( f : U \to \C\) is a Riemann surface with the projection on the first coordinate.
+\end{example}
+
+\begin{example}[Riemann sphere]
+    Our charts are \( (\phi_0,U_0)\) and \((\phi_1,U_1)\), where
+    \begin{align*}
+        U_0 = \{ [x:y] \in \PP \mid x \neq 0 \} \quad \phi_0 ([x:y])=\frac{y}{x}\\
+        U_1 = \{ [x:y] \in \PP \mid y \neq 0 \} \quad \phi_1 ([x:y])=\frac{x}{y}
+    \end{align*}
+    It's easy to see that these charts define a structure of topological manifold on \(\PP\).
+    It remains to check that these define a complex atlas i.e. that the two charts are compatible.
+    Since \( \phi_1 \circ \phi_0^{-1}: \C^* \to \C^*\) is the map \(z \to \frac{1}{z}\), it is holomorphic.
+
+    
+\end{example}
+    
+\begin{example}[Affine algebraic curves]
+    Take a polynomial \(f \in \C[x,y]\) and consider
+    \[
+    V(f) = \{(x,y) \in \C^2 \mid f(x,y) = 0\},
+    \]
+    we call it an affine algebraic curve.
+    If \(\frac{ \de f}{\de x} \) and \(\frac{ \de f}{\de y} \) don't vanish at the same time, we say that our curve is smooth.
+    
+    Assume now that \(V(f)\) is smooth and let \(p = (x_0,y_0) \in V(f)\).
+    Without loss of generality we can assume that \(\frac{ \de f}{\de x}(p) \neq 0\), then by the implicit function theorem, there exists an open neighborhood \(U_p \in \C^2\) of \(p\), an open neighborhood \(W_{x_0} \in \C\) of \(x_0\), and a holomorphic function \(\varphi : W_{x_0} \to \C\), such that
+    \[
+    V(f) \cap U_p = \{(x,\varphi(x)) \mid x \in W_{x_0}\}.
+    \]
+    We take as an atlas for \(V(f)\) the projections on the first coordinate, that is \( \{V(f) \cap U_p, \pi\}\) where \(\pi(x,f(x))=x\).
+    If two charts are the projection on the same axis, then the transition map is the identity, which is of course holomorphic. If we have \(\pi_1\) and \(\pi_2\) projections on different axes, then the transition map is \(\varphi\), which is holomorphic.
+\end{example}
+
+\begin{example}[Projective algebraic curves]
+    A projective algebraic curve is the zero locus in \(\P^2(\C)\) of an homogeneous polynomial in three variables, i.e. if \(F \in \C[X,Y,Z]\) is homogeneous, then its vanishing locus is well defined
+    \[
+    V(F) = \{[X:Y:Z] \in \P^2(\C) \mid F(X,Y,Z) = 0 \}.
+    \]
+    We say that \(V(F)\) is smooth if
+    \[
+    \{(X,Y,Z) \mid \frac{ \de F}{\de X} = \frac{ \de F}{\de Y} = \frac{ \de F}{\de Z} = 0\} \subseteq \{(0,0,0)\}.
+    \]
+    The important fact about projective algebraic curves is that they are compact, indeed, if we consider the quotient map \(\pi : \C^3 \setminus \{0\} \to \P^2(\C)\) it happens that \(\pi^{-1}(V(F)) = F^{-1}(0)\), then \(V(F)\) is closed in a compact space and thus it is compact.
+    We check that it is a Riemann surface on an open cover of \(\P^2(\C)\).
+    Let's consider \(U_z = \{[X:Y:Z] \mid Z \neq 0\}\) homeomorphic to \(\C^2\), with the map \([X:Y:Z] \to (\frac{X}{Z},\frac{Y}{Z})\).
+    \(V(F) \cap U_z = V(f)\) where \(f(X,Y) = F(X,Y,1)\) is an affine algebraic curve and by the Euler identity it is smooth, in fact, if both the partial derivatives vanish at \(p\) we have a contradiction:
+    \[
+    0 = deg(F) F(p) = \frac{ \de F}{\de X}(p) X + \frac{ \de F}{\de Y}(p)Y + \frac{ \de F}{\de Z}(p) 1 = \frac{ \de F}{\de Z}(p) \neq  0.
+    \]
+    Then, on \(U_z , \; V(F)\) is a Riemann surface. The same argument can be applied to
+    \begin{align*}
+        U_x = \{[X:Y:Z] \mid X \neq 0\}\\
+        U_y = \{[X:Y:Z] \mid Y \neq 0\}
+    \end{align*}
+    and thus \(V(F)\) is a Riemann surface.
+\end{example}
+
+\begin{example}[Complex tori]
+    Other classical examples of compact Riemann surfaces are complex tori, defined as follows.
+    Take a lattice
+    \[\Lambda = \omega_1\Z \oplus \omega_2\Z\]
+    Where \(\omega_1\) and \(\omega_2\) are \(\R\)-linearly independent vectors in \(\C\). We define the complex torus associated to \(\Lambda\) as
+    \[E = \C/\Lambda\]
+    From a topological point of view, they are all tori, but as Riemann surfaces, there are infinitely many non-isomorphic ones.
+    
+\end{example}
+
+\section{Maps of Riemann surfaces}
+
+\begin{definition}
+    Let \(X\) and \(Y\) be Riemann surfaces. We say that a map \(f:X \to Y\) is holomorphic at \(x \in X\) if
+    there exist a chart \( \phi : U_x \to \C\) and a chart \( \psi : V_{f(x)} \to \C\), such that \(\,\psi \circ f \circ \phi^{-1}\) is holomorphic at \(\phi(x)\). Where \(U_x\) and
+    \(V_{f(x)}\) are neighborhoods of \(x\) and \(f(x)\), respectively.
+    If \(f\) is holomorphic at every \(x \in X\) we say that \(f\) is holomorphic.
+\end{definition}
+
+\begin{remark}
+    The above definition is independent from the choice of the charts, in fact, if \(\phi' , \psi'\) are other charts we have \(\psi' \circ f \circ \phi'^{-1} = (\psi' \circ \psi^{-1}) \circ (\psi \circ f \circ \phi^{-1}) \circ (\phi \circ \phi'^{-1})\) that is a composition of holomorphic functions.
+\end{remark}
+
+\begin{definition}[Meromorphic function]
+    A meromorphic function on a Riemann surface \(X\) is a holomorphic map \(f: X \to \PP\).
+\end{definition}
+
+\begin{definition}
+    Two Riemann surfaces \(X\) and \(Y\) are said to be isomorphic (or biholomorphic) if there exist two holomorphic maps \(f : X \to Y\) and \(g : Y \to X\), such that \(f \circ g = id_Y\) and \(g \circ f = id_X\).
+\end{definition}
+
+\begin{remark}\label{rem:Isomorfe}
+    By the open mapping theorem, \(X\) and \(Y\) are isomorphic if and only if there exists an invertible and holomorphic map \(f : X \to Y\).
+\end{remark}
+
+\begin{example}
+    Take a holomorphic function \(f:U \to \C\) where \(U\) is open. Then, the graph \(\Gamma_f = \{ (x,f(x)) \; | \; x \in U \} \) is isomorphic to \(U\). In fact, the map
+    \[
+    F : U \to \Gamma_f
+    \]
+    \[
+    x \to (x,f(x))
+    \]
+    is holomorphic and invertible.
+\end{example}
+
+\begin{proposition}\label{prop:CompattaSuriettiva}
+    If \(f:X \to Y\) is a non constant holomorphic map of Riemann surfaces where \(X\) is compact and \(Y\) is connected, then \(f\) is surjective.
+\end{proposition}
+
+\begin{proof}
+    By the open mapping theorem \(f(X)\) is open. Since \(X\) is compact, then \(f(X)\) is closed, moreover \(Y\) is connected and thus \(f(X)=Y\).
+\end{proof}
+
+\begin{corollary}
+    The only holomorphic functions on a compact Riemann surface are constant ones.
+\end{corollary}
+
+\section{Local Properties of Maps }
+
+\begin{definition}
+    We say that a chart \(\phi : U_x \to \C\) is centered at \(x\) if \(\phi(x)=0\).
+\end{definition}
+
+\begin{theorem}[Local Normal Form]\label{thm:LocalNormalForm}
+    Let \(f : X \to Y\) be a non constant map of Riemann surfaces holomorphic at \(x \in X\). Then, there exists a unique integer \(k \geq 1\) which satisfies the following: for every chart \(\psi : V_{f(x)} \to \C\) of \(Y\) centered at \(f(x)\), there exists a chart \(\phi : U_x \to \C\) of \(X\) centered at \(x\) such that \( \psi \circ f \circ \phi^{-1}(z) = z^k\).
+\end{theorem}
+
+\begin{proof}
+    Take any chart \(\phi : U_x \to \C\) centered at \(x\) and consider the Taylor expansion near \(0\) of the map \(F = \psi \circ f \circ \phi^{-1}\).
+    \[
+    F(z) = \sum_{n=0}^{\infty} a_n z^n.
+    \]
+    Take \(k = \min\{n \; | \; a_n \neq 0\}\).
+    Now because \(\psi\) and \(\phi\) are centered at \(0\), then \(F(0)=0\), so \(a_0 = 0\) and therefore \(k \geq 1\).
+    We can write
+    \[
+    F(z) = z^k \sum_{n=k}^{\infty} a_n z^n = z^k G(z) \qquad G(0) \neq 0.
+    \]
+    Since \(G(0) \neq 0\), we can choose a function \(\eta(z)\) such that \(\eta(z)^k = G(z)\) in a neighborhood of \(0\) and define the function \(w=\zeta(z) = z \eta(z)\), which serves as a new coordinate for \(Y\).
+    We observe that \(\zeta'(z) = \eta(z) + z \eta(z)'\) and thus \(\zeta'\) doesn't vanish at \(0\). By the inverse function theorem \(\zeta\) is a local biholomorphism, so in a neighborhood of \(x\) we can define the chart \(\Phi = \zeta \circ \phi\) that is again centered at \(x\).
+    \begin{align*}
+    \psi \circ f \circ \Phi^{-1} (w) &= F(\zeta^{-1}(w)) \\
+    &= F(z) \\
+    &= (z \eta(z))^k \\
+    &= w^k
+    \end{align*}
+    The uniqueness of \(k\) comes from the fact that near \(F(x)\) there are \(k\) preimages, then we cannot have another exponent.
+\end{proof}
+
+\begin{definition}
+    Let \(f : X \to Y\) be a non constant holomorphic map of Riemann surfaces.
+    \begin{itemize}
+        \item The integer \(k_x\), such that there exists a local expression of \(f\) near \(x\) of the form \(z \to z^{k_x}\), is called ramification index of \(f\) at \(x\).
+        \item If a point \(x\) has ramification index \(k_x = 1\) it is called unramified and we say that \(f\) is unramified at \(x\).
+        \item If a point \(x\) has ramification index \(k_x \geq 2\) it is called ramification point. The set of all ramification points is called ramification locus and it is denoted by \(R\).
+        \item The set \(B = f(R)\) is called branch locus and its elements are called branch points.
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}\label{prop:CalcoloRamificazione}
+    Let \(f : X \to Y\) be a non constant holomorphic map of Riemann surfaces and \(h = \psi \circ f \circ \phi^{-1} \) a local expression such that \(\phi^{-1}(z_0) = x_0\). Then, the ramification index of \(f\) at \(x_0 \in X\) can be calculated in the following way:
+    \[
+    k_{x_0} = 1 + ord_{z_0}(h').
+    \]
+\end{proposition}
+
+\begin{proof}
+    In the proof of Theorem \ref{thm:LocalNormalForm} we have seen that the ramification index \(k_{x_0}\) is the minimum integer \(m\), such that the coefficient \(a_m\) of the Taylor expansion near \(0\) of \(F\) doesn't vanish, where the charts used for \(F\) are centered at \(x_0\) and \(f(x_0)\). Let \(w_0 = \psi(f(x_0))\) and note that \(\phi(x) - z_0\) and \(\psi(y)-w_0\) are centered. The corresponding local form of \(f\) is \(F(z) = h(z+z_0) - h(z_0)\).
+    Let's expand \(h\) near \(z_0\)
+    \[
+    h(z) = h(z_0) + \sum_{n = m}^{\infty} a_n (z-z_0)^n \qquad a_{m} \neq 0
+    \]
+    and take the derivative, then \(ord_{z_0}(h') = ord_{0}(F') = m - 1\), that is one less than the ramification index of \(f\) at \(x_0\).
+\end{proof}
+
+\begin{corollary}
+    The ramification locus \(R\) of a non constant holomorphic map of Riemann surfaces \(f : X \to Y\) is discrete.
+    If \(X\) is compact, then \(R\) is finite.
+\end{corollary}
+
+\begin{proof}
+    By Proposition \ref{prop:CalcoloRamificazione} \(f\) is ramified at \(x \in X\) if and only if \(ord_{z_0}h' \geq 1\), i.e. the ramification points correspond to the zeros of \(h\), thus they are discrete.
+    
+    If \(X\) is compact, then \(R\) must be compact, therefore it is finite.
+\end{proof}
+
+\begin{definition}
+    Let \(f : X \to Y\) a non constant holomorphic map of compact Riemann surfaces with \(Y\) connected. Then, we define the degree of \(f\)
+    \[
+    Deg(f) = \sum_{x \in f^{-1}(y)} k_x .
+    \]
+    for any \(y \in Y\).
+    If \(f\) is constant we set \(Deg(f) = 0\).
+\end{definition}
+
+\begin{proposition}
+    \(Deg(f)\) doesn't depend on the choice of \(y \in Y\).
+\end{proposition}
+
+\begin{proof}
+    First of all observe that \(g : D \to D\) given by \(g(z) = z^k\), where \(D = \{z \in \C \mid \; | z | < 1\}\), has \(k\) preimages with ramification indices \(1\) if \(z \neq 0\), and one preimage with ramification index \(k\) in \(z = 0\).
+    Now we want to prove that the function \( d(y) = \displaystyle\sum_{x \in f^{-1}(y)} k_x\) is locally constant so that, since \(Y\) is connected, then \(d(y)\) is constant.
+    Fix a point \(y \in Y\) and let \(\{x_1 \ldots x_n\}\) be the fiber of \(y\). By Theorem \ref{thm:LocalNormalForm} we may choose local coordinates \(w\) near \(y\) and \(z_i\) for each \(x_i\), such that \(f\) is of the form \(z_i \mapsto z_i^{k_{x_i}}\).
+    Therefore we have a map from the disjoint union of \(n\) disks to \(D\) where the preimages of \( 0\) are exactly \(n\) with ramification index \(k_{x_i}\), and the preimages of \(w \neq 0\) are \(k_{x_i}\) for each disk with ramification index \(1\). This shows that the function \(d(y)\) is constant near \(y\).
+    
+    It remains to check that we have considered all the preimages near \(y\).
+    Suppose that for every neighborhood of \(y\) there are preimages that are not in any of the neighborhoods of the \(x_i\)'s. Then, we can construct a sequence \(x_j\) of points in \(X\), none of which lie in any neighborhoods of the \(x_i\)'s, such that \(f(x_j) \to y\). By the compactness of \(X\) we may extract a convergent subsequence \(x_s\). Since \(f\) is continuous the limit point of \(x_s\) must be one of the \(x_i\)'s and this is a contraddiction.
+\end{proof}
+
+\begin{remark}
+    Observe that if \(y\) is not a branch point, then the ramification indices are \(1\) and so the degree of \(f\) is simply the cardinality of the fiber of \(f\) at \(y\). In general the fiber has cardinality at most \(Deg(f)\).
+\end{remark}
+
+\begin{proposition}
+    A holomorphic map of compact, connected Riemann surfaces \(f : X \to Y\) is an isomorphism if and only if \(Deg(f) = 1\).
+\end{proposition}
+
+\begin{proof}
+    If \(f\) is an isomophism, then of course it has degree \(1\).
+    If \(Deg(f)=1\), then \(f\) is not constant, so by \ref{prop:CompattaSuriettiva} it is onto. \(Deg(f)=1\) ensures that the fibers have cardinality \(1\) and thus \(f\) is injective. By remark \ref{rem:Isomorfe} it is an isomorphism.
+\end{proof}
+
+\begin{proposition}
+    The meromorphic functions on \(\PP\) are rational.
+\end{proposition}
+
+\begin{proof}
+    Let \(f : \PP \to \PP\) be a holomorphic map, where we think of \(\PP\) as \(\C \cup \{\infty\}\).\\
+    If \(f\) is constant, then it is rational, so we can assume \(f\) non constant.
+    Consider \(f^{-1}(0) = \{x_1 \ldots x_n\} \) and \(f^{-1}(\infty) = \{y_1 \ldots y_m\}\) and suppose that no one of the \(x_i\)'s or \(y_i\)'s is \(\infty\).
+    Define the rational and hence holomorphic function
+    \[
+    \phi(z) = \frac{ (z-x_1)^{k_{x_1}} \ldots (z-x_n)^{k_{x_n}} }{ (z-y_1)^{k_{y_1}} \ldots (z-y_m)^{k_{y_m}} }.
+    \]
+    The function \( f(z) \slash \phi(z)\) is of course holomophic but does not assume the value \(0\) or \(\infty\). Then, by Proposition \ref{prop:CompattaSuriettiva} it is constant.
+    If one of the \(x_i\)'s or \(y_i\)'s is \(\infty\) we simply omit the corresponding term in \(\phi\).
+    \end{proof}
+
+    \begin{corollary}
+        The automorphisms of \(\PP\) are all of the form
+        \[
+        \phi(z) = \frac{az+b}{cz+d} \qquad \text{where} \quad ad-bc \neq 0.
+        \]
+    \end{corollary}
+
+\section{Riemann-Hurwitz Theorem}
+
+The problem of finding conditions for the existence of maps between compact Riemann surfaces is an important aspect of Hurwitz theory. The Riemann-Hurwitz theorem provides a necessary condition and shows that there is a relationship among the degree of the map, the ramification profile, and the genera of the two Riemann surfaces involved. So the Riemann-Hurwitz formula is the first foundational result of Hurwitz theory presented in this thesis.
+
+\begin{theorem}[Riemann-Hurwitz]
+    Let \(f : X \to Y\) be a holomorphic map of compact Riemann surfaces of degree \(d \geq 1\), where \(Y\) is connected. Then, the following formula holds:
+    \[
+    2g(X)-2 = d(2g(Y)-2) + \sum_{x \in X} (k_x -1).
+    \]
+\end{theorem}
+
+\begin{proof}
+    Take a triangulation \(\mathcal{T}\) of \(Y\) such that each branch point is a vertex. There are \(T\) triangles, \(E\) edges, and \(V\) vertices, if we lift this triangulation to a triangulation of \(X\) we get \(d \cdot T\) triangles and \(d \cdot E\) edges.
+    Each vertex \(v\) lift to \( \#f^{-1}(v)\) vertices. Observe that from the definition of degree we have
+    \[
+    \#f^{-1}(v) = d -\sum_{f^{-1}(v)} (k_x -1).
+    \]
+    Then,
+    \begin{align*}
+    \chi(X) &= T' - E' + V' = d \cdot T - d \cdot E + \sum_{v \in \mathcal{T}}\#f^{-1}(v)\\
+     &= d \cdot T - d \cdot E + \sum_{v \in \mathcal{T}}(d - \sum_{f^{-1}(v)} (k_x -1))\\
+     &= d \cdot T - d \cdot E + d \cdot V - \sum_{v \in \mathcal{T}}(\sum_{f^{-1}(v)} (k_x -1)) \\
+     &= d \chi(Y) - \sum_{x \in X} (k_x-1). \qedhere
+    \end{align*}
+\end{proof}
+
+\begin{remark}
+    The above summation is always finite, in fact \(k_x > 1\) exactly when \(x \in R\) and by the compactness \(R\) is finite. 
+\end{remark}
+
+\begin{remark}
+    An immediate consequence of the Riemann-Hurwitz formula is that there do not exist non constant holomorphic maps of compact Riemann surfaces if the genus of the domain is smaller than the genus of the codomain.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%SECOND CHAPTER
+\chapter{Hurwitz Theory}\label{chap:HurwitzTheory}
+\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
+
+\section{Hurwitz Numbers}
+
+\begin{definition}[Ramification profile]
+    Let \(f : X \to Y\) be a holomorphic map of compact Riemann surfaces of degree \(d\). Let \(y_0 \in Y\) and consider \(f^{-1}(y_0)=\{x_1, \ldots , x_n\}\). We call ramification profile of \(f\) at \(y_0\) the set of ramification indices 
+    \(\{k_{x_1}, \ldots, k_{x_n}\}\).
+    We say that
+    \begin{itemize}
+        \item \(f\) is unramified at \(y_0\) if the ramification profile is \((1, \ldots, 1)\);
+        \item \(f\) has simple ramification at \(y_0\) if the ramification profile is \((2, 1, \ldots, 1)\);
+        \item \(f\) is fully ramified at \(y_0\) if the ramification profile is \((d)\).
+    \end{itemize}
+    Note that the ramification profile is a partition of \(d\).
+\end{definition}
+
+\begin{definition}
+    Let \(f : X \to Y\) and \(g : Z \to Y\) be two holomorphic maps of compact Riemann surfaces. We say that \(f\) and \(g\) are isomorphic if there exists an isomorphism \(h : X \to Z\) such that \(f = g \circ h\). An automorphism of a holomorphic map \(f\) is an isomorphism of the map with itself. We denote \(Aut(f)\) the group of automorphisms of \(f\).
+\end{definition}
+
+
+\begin{definition}[Hurwitz Cover]
+    Given a genus \(g\), \(n\)-marked, compact, Riemann surface \((Y, b_1, \ldots, b_n)\), an integer \(d \geq 0\), and \( (\lambda_1, \ldots, \lambda_n)\) partitions of \(d\), we call (connected) Hurwitz cover of type \((h,d,\lambda_1 \ldots \lambda_n)\) a map \(f:X \to Y\) such that
+    \begin{itemize}
+        \item \(X\) is a (connected) compact Riemann surface of genus \(h\);
+        \item \(f\) has degree \(d\);
+        \item \(f\) is branched at \(\{b_1, \ldots, b_n\}\) and not elsewhere;
+        \item the ramification profile of \(f\) at \(b_i\) is \(\lambda_i\);
+    \end{itemize}
+    where \(h\) is determined by the Riemann Hurwitz formula.
+\end{definition}
+
+\begin{definition}[Hurwitz Number]
+    Let \((Y, b_1, \ldots, b_n)\) be an \(n\)-marked, compact, Riemann surface of genus \(g\). Let \(d\) be a non negative integer and \( (\lambda_1 \ldots \lambda_n)\) partitions of \(d\). We define the connected Hurwitz number associated with this discrete data as a sum over the isomorphism classes of connected Hurwitz covers of type \((g,d,\lambda_1 \ldots \lambda_n)\) weighted by the order of the group of their automorphisms.
+    \[
+    H_{h \to g,d}(\lambda_1, \ldots \lambda_n) = \sum_{[f]} \frac{1}{|Aut(f)|}
+    \]
+    Similarly we define the disconnected Hurwitz number
+    \[
+    H_{h \to g,d}^{\bullet}(\lambda_1, \ldots \lambda_n) = \sum_{[f]} \frac{1}{|Aut(f)|}
+    \]
+    Sometimes, if we have r simple ramifications among the \(\lambda_i\)'s, we don't indicate them but instead use an r as an exponent in the following way \(H^r_{h \to g,d}(\lambda_1, \ldots \lambda_s)\).
+\end{definition}
+
+The finiteness of Hurwitz numbers is highly non-obvious and will be proved in section \ref{sec:countingmonodromy} as a consequence of monodromy.
+
+\section{Covering Spaces}
+
+\begin{definition}[Covering Space]
+    A covering space of a topological space \(Y\) is a continuous map \(p: X \to Y\) such that for every \(y \in Y\) there exists a neighborhood \(U_y\) whose \(p^{-1}(U_y) = \bigcup_{i \in I} V_i\) and \(p_{|V_i}:V_i \rightarrow U_y\) is a homeomorphism for every \(i\).
+\end{definition}
+
+\begin{definition}[Ramified cover]
+    A continuous function between compact topological surfaces \( p : X \to Y\) is called ramified cover if there exists a finite set \(B \subseteq Y\) such that:
+    \begin{itemize}
+        \item \(p^{-1}(B)\) is finite;
+        \item \(p : X \setminus p^{-1}(B) \to Y \setminus B\) is a covering space.
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    A non constant holomorphic map of compact Riemann surfaces \(f : X \to Y\) is a ramified cover.
+\end{proposition}
+
+\begin{theorem}[Galois correspondence of covering spaces]\label{thm:GaloisCorrespondence}
+    There is a 1-1 correspondence
+    \[     
+     \left\{
+        \parbox{4.5cm}{\centering Isomorphism classes of connected covering spaces \(f:X \to Y\).}
+     \right\}
+     \longleftrightarrow
+     \left\{
+        \parbox{3.5cm}{\centering Conjugacy classes of subgroups \(H \leq \pi_1(Y,y_0)\).}
+     \right\}
+    \] 
+\end{theorem}
+
+\begin{proof}
+    \cite[Ch. 1, Thm. 1.38, p. 67]{Hatcher02}
+\end{proof}
+
+\begin{theorem}[Monodromy correspondence]
+    There is a 1-1 correspondence
+    \[     
+     \left\{
+        \parbox{4.5cm}{\centering Isomorphism classes of path connected, covering spaces \(f:X \to Y\) \\ of degree \(d\).}
+     \right\}
+     \longleftrightarrow
+     \left\{
+        \parbox{4cm}{\centering Transitive group actions \(\rho : \pi_1(Y,y_0) \to S_d\), up to conjugacy.}
+     \right\}
+    \] 
+\end{theorem}
+
+\begin{proof}
+    Let \(f : X \to Y\) be a path connected covering of degree \(d\). Fix a point \(y_0 \in Y\) and a loop \([\gamma] \in \pi_1(Y,y_0)\) and consider the permutation of \(f^{-1}(y_0) = \{x_1 \ldots x_d\} \) constructed in the following way: lift \(\gamma\) to \(\Tilde{\gamma}_j\) from \(x_j\). Since \(\gamma(0) = \gamma(1) = y_0 \), then \(\Tilde{\gamma}_j(1) \in f^{-1}(y_0)\) and so it is one of the \(x_i\)'s. \(\sigma \) is defined so that \(\Tilde{\gamma}_j(1) = x_{\sigma(j)}\). This is a permutation because one can define the permutation corresponding to \(\gamma^{-1}\) that is its inverse. So we have defined a function \( \rho : \pi_1(Y,y_0) \to S_d\). 
+    The function is well defined because the end point of a lift depends only on the homotopy class of the loop.
+    If we consider \(\gamma * \mu\), by the uniqueness of the lift, \(\widetilde{\gamma * \mu}(1)\) is equal to the end point of \(\Tilde{\mu}\) when the lift starts from \(\Tilde{\gamma}(1)\), therefore the above function is a group homomorphism.
+    
+    Observe that \(\rho\) depends on the label of the fiber \(f^{-1}(y_0)\), this is why \(\rho\) is determined up to conjugacy. In fact, if we consider a permutation \(\omega \in S_d\) of the indices of the \(x_i\)'s and lift \(\gamma\) from \(x_{\omega(j)}\), then \(\Tilde{\gamma}(1)=x_{\sigma'(\omega(j))}\). In the old labeling \(\Tilde{\gamma}(1) = x_{\sigma(j)}\). This index in the new labeling is \(\omega(\sigma(j))\), thus \(\sigma' \omega = \omega \sigma\). Then, \(\sigma\) and \(\sigma'\) are conjugate.
+    Now we have to check that the homomorphism so defined stays the same if we change \(f\) with another isomorphic cover. Take \(g : X' \to Y\) and a homeomorphism \(h : X \to X'\) such that \( f = g \circ h \). If we lift \(\gamma\) via \(g\) from \(h(x_j)\), then \(\Tilde{\gamma}'(1) = h(\Tilde{\gamma})(1)\). So, if we enumerate the preimages of \(y_0\) via \(g\) correctly, i.e. we call \(x'_j\) the element \(h(x_j)\), we get the same \(\sigma\) and thus the same group homomorphism \(\rho\).
+
+    Finally it remains to prove that the image is transitive, i.e. that given two indices \(i, j\) there is a permutation \(\sigma \in \rho(\pi_1(Y,y_0))\) such that \(\sigma(i) = j\). Since \(X\) is path connected we can consider a path \(\Tilde{\gamma}\) from \(x_i\) to \(x_j\), which is the lift of \(f(\Tilde{\gamma})\) that achieves what we want.
+
+    Conversely, if we have a group action \(\rho : \pi_1(Y,y_0) \to S_d\) with transitive image, we can consider \(Stab(1) = \{ [\gamma] \in \pi_1(Y, y_0) \mid \rho([\gamma])(1)=1\} \). This is a subgroup of \(\pi_1(Y,y_0)\); then, by the orbit-stabilizer theorem it has index equal to the length of the orbit \(O(1) = \{\rho([\gamma])(1) \mid [\gamma] \in \pi_1(Y, y_0)\}\), and by transitivity, this is \(d\). By \ref{thm:GaloisCorrespondence} this subgroup induces a connected cover \(f : X \to Y\). If we take a conjugation action \(C_{\omega}(x) = \omega^{-1}x\omega\) and consider \(C_{\omega} \circ \rho\), then the new stabilizer is
+    \begin{align*}
+    Stab'(1) &= \{ [\gamma] \in \pi_1(Y, y_0) \mid (\omega^{-1}\rho([\gamma])\omega)(1)=1\}\\
+    & = \{ [\gamma] \in \pi_1(Y, y_0) \mid \rho([\gamma])\omega(1)=\omega(1)\}
+    \end{align*}
+    Since \(\rho\) is transitive we can consider \([\mu] \in \pi_1(Y,y_0)\) such that \(\rho([\mu])(1) = \omega(1)\), then
+    \begin{align*}
+    Stab'(1) &= \{ [\gamma] \in \pi_1(Y, y_0) \mid \rho([\gamma])\omega(1)=\omega(1)\}\\
+    & = \{ [\gamma] \in \pi_1(Y, y_0) \mid \rho([\gamma])\rho([\mu])(1)=\rho([\mu])(1)\}\\
+    & = \{ [\gamma] \in \pi_1(Y, y_0) \mid \rho([\mu\gamma\mu^{-1}])(1)=1\}\\
+    & = [\mu] Stab(1) [\mu^{-1}]
+    \end{align*}
+    We have proved that the cover we obtain is associated to a conjugate subgroup of \(Stab(1)\), so it is in the same isomorphism classes of \(f\).
+\end{proof}
+
+\section{Riemann Existence Theorem}
+The Riemann existence theorem is the central result of this chapter.\\
+Since now we have seen that holomorphic maps are ramified covers, the following theorem states the converse and provides a link with the topology which will take us to the monodromy of holomorphic maps. 
+
+\begin{theorem}[Riemann Existence Theorem]
+    Let \(Y\) be a compact Riemann surface and \(X^{\circ}\) a topological surface. Suppose that \(f^{\circ} : X^{\circ} \to Y\setminus\{b_1,\dots,b_n\} \) is a topological cover of finite degree.
+    Then, there exists a unique, up to isomorphism, compact Riemann surface \(X\) and a holomorphic map \(f: X \to Y\), such that:
+    \begin{itemize}
+        \item \(f_{|X^{\circ}} = f^{\circ}\);
+        \item \( X^{\circ}\) is dense in \(X\).
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    \textit{Step 1}: In this first step, we complete \(X^{\circ}\) to a compact surface and extend \(f^{\circ}\) to a continuous function. Let's consider one of the \(b_i\)'s and denote it \(b\). Let \(\varphi\) be a chart near \(b\) and take \(\Delta = \varphi^{-1}(\{|w| < 1\})\). The function \(f^{\circ} : (f^{\circ})^{-1}(\Delta \setminus b) \to \Delta \setminus b \) is a topological cover of finite degree \(d\). Let \(U_1, \ldots, U_m\) be the connected components of \((f^{\circ})^{-1}(\Delta \setminus b)\). Since \(\Delta \setminus b\) is homotopy equivalent to a circle, its fundamental group is \(\Z\). Thus, by Theorem \ref{thm:GaloisCorrespondence} a connected finite covering space of \(\Delta \setminus b\) is homeomorphic to a punctured disk and has the form \(z \mapsto z^k\). Then, there exist positive integers \( k_1, \ldots, k_m\) and homeomorphisms \(\phi_i^{\circ}: U_i \to \{0 < |w| < 1\}\) such that \(\varphi \circ f^{\circ} \circ (\phi_i^{\circ})^{-1} (z) = z^{k_i}\). Now, add a point \(x_i\) to \(X^{\circ}\) such that \(\phi_i^{\circ}\) extends to a homeomorphism \(\phi : U_i \cup \{x_i\} \to \{|w| < 1\}\) with \(\phi_i(x_i)=0\). After repeating this process for all the \(b_i\)'s we have added a finite number of points to \(X^{\circ}\) to obtain a topological surfaces \(X\). In fact, it is locally Euclidean near the added points \(x_i\) because of the homeomorphism \(\phi_i\) constructed above. \(f^{\circ}\) naturally extends to a continuous function \(f:X \to Y\) sending \(x_i\) to the corresponding \(b\). \(X\) is compact, indeed, if we remove each \(\Delta\) from \(Y\) we obtain a compact space, then \(f^{\circ}\) restrict to a compact covering space \(Z\). \(X\) is the union of \(Z\) and the closures of the \(U_i\)'s that are finite and compact, then it is compact.
+    
+    \textit{Step 2}: We must show that \(X\) may be given a complex structure in such a way that \(f\) is holomorphic. For each \(x \in X^{\circ}\) we can choose an open neighborhood \(U_x\) such that \(f^{\circ}_{|U_x}\) is a homeomorphism and \(f^{\circ}(U_x)\) is contained in some chart \(\varphi_x\) for \(Y\), then we take \(\varphi_x \circ f^{\circ}_{|U_x}\) as a chart for \(X\) near \(x\). With this choice, a local expression of \(f\) near \(x\) is the identity function and hence it is holomorphic. For a new point \(x_i\) we use the homeomorphism \(\phi_i\) as a chart; then a local expression of \(f\) is \(z \mapsto z^{k_i}\), which is holomorphic. The charts so defined are compatible by construction.
+\end{proof}
+
+\section{Monodromy of Hurwitz Covers}
+
+\begin{definition}
+    Let \((Y, b_1, \ldots, b_n)\) be an \(n\)-marked compact Riemann surface of genus \(g\), let \(y_0 \in Y\) and let \(\lambda_i\) be partitions of a positive integer \(d\).
+    We call connected monodromy representation of type \((g,d,\lambda_1 \ldots \lambda_n)\) a group action \(\rho : \pi_1(Y \setminus B,y_0) \to S_d\) such that:
+    \begin{itemize}
+        \item \(\rho\) is transitive;
+        \item if \(\gamma_i\) is a loop around \(b_i\), then \(\rho([\gamma_i])\) has cycle type \(\lambda_i\).
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}
+    There is a 1-1 correspondence
+    \[     
+     \left\{
+        \parbox{6cm}{\centering Isomorphism classes of connected Hurwitz covers \(f : X \to Y\) of type \((g,d,\lambda_1, \ldots, \lambda_n)\).}
+     \right\}
+     \longleftrightarrow
+     \left\{
+        \parbox{6cm}{\centering Connected monodromy representations \(\rho : \pi_1(Y \setminus B,y_0) \to S_d\) of type \((g,d,\lambda_1, \ldots, \lambda_n)\), up to conjugacy.}
+     \right\}
+    \] 
+\end{theorem}
+
+\begin{proof}
+    We know that a holomorphic map of compact Riemann surfaces is a covering map away from the branch points; therefore, we can apply the classical monodromy theory for covering spaces. The Riemann existence theorem assures us that there is only one way to extend such covers to holomorphic maps defined on all of \(X\).
+    It remains to check that if \(\gamma\) is a loop around one branch point \(b_i\), then it gives rise to a permutation of cycle type \(\lambda_i\). Take \(r\) in the preimage of \(b_i\) and choose local coordinates near \(r\) and \(b_i\) such that \(f\) is of the form \(z \mapsto z^{k_j}\). Note that \(\gamma \sim \alpha * \beta * \alpha^{-1}\), where \(\beta\) is a parametrization of \(\{| w | = 1\}\) and \(\alpha\) is a path connecting \(y_0\) and the point in \(Y\) corresponding to \(0\) trough the local coordinate \(w\). Then, \(\rho(\gamma)\) cyclically permute the \(k_j\) roots of unity \(\{z^{k_j} = 1\}\). This happens for every element in the preimage of \(b_i\), thus \(\rho(\gamma)\) is product of disjoint cycles, each of length \(k_j\).
+    \end{proof}
+
+In particular, if we look at \(Y = \PP\), then the classification becomes
+
+\begin{theorem}\label{th:monp1}
+    There is a 1-1 correspondence
+    \[     
+     \left\{
+        \parbox{6cm}{\centering Isomorphism classes of connected Hurwitz covers \(f : X \to \PP\) of type \((g,d,\lambda_1, \ldots, \lambda_n)\).}
+     \right\}
+     \longleftrightarrow
+     \left\{
+        \parbox{6cm}{\centering Conjucacy classes of \(n\)-tuples \((\sigma_1, \ldots, \sigma_n)\) where \( \sigma_i \in S_d\) has cycle type \(\lambda_i\), the subgroup generated by the \(\sigma_i\)'s is transitive, and \(\sigma_1 \ldots \sigma_n = e\).}
+     \right\}
+    \] 
+\end{theorem}
+
+
+\begin{proof}
+    The fundamental group of \(\PP \setminus \{b_1 \ldots b_n\}\) can be presented as
+    \[
+    \langle \rho_1, \ldots, \rho_n \mid \rho_1 \ldots \rho_n = e \rangle,
+    \]
+    where the \(\rho_i\)'s are small loops around the \(b_i\)'s.
+    From the above theorem a monodromy representation is given by the choice of \((\sigma_1, \ldots, \sigma_n)\) with cycle types \((\lambda_1, \ldots, \lambda_n)\) such that the product is the identity.
+\end{proof}
+
+\begin{remark}
+    If we want to allow the source Riemann surface to be disconnected we simply require that the monodromy representation is not necessarily transitive.
+\end{remark}
+
+\section{Counting Maps Via Monodromy}\label{sec:countingmonodromy}
+The monodromy correspondence represents a significant advancement in our ability to calculate Hurwitz Numbers. It gives us a purely combinatorial method that is far better than a geometric approach to the problem, as we will see in example \ref{ex:genus0numbers}. Furthermore, we can now assert that Hurwitz covers are finite and do not depend on the position of points or on the complex structure of the Riemann surface, but solely on its topology.
+
+\begin{theorem}
+    Let \((Y, b_1, \ldots, b_n)\) be an \(n\)-marked Riemann surface of genus \(g\). Let \(M\) be the set of (connected) monodromy representations of type \((g,d,\lambda_1, \ldots, \lambda_n)\). Then, we can calculate the Hurwitz number in the following way:
+    \[
+    H_{h \to g,d}^{(\bullet)}(\lambda_1, \ldots, \lambda_n) = \frac{|M|}{d!}
+    \]
+\end{theorem}
+
+\begin{proof}
+    Fix an Hurwitz cover \(f:X \to Y\) and observe that it gives rise to \(m_f\) different monodromy representations all conjugate to each other because of the relabeling of \(f^{-1}(y_0)\). We have \(d!\) way to relabel \(f^{-1}(y_0)\) but each automorphism gives the same representation, then \(m_f = \frac{d!}{|Aut(f)|}\).
+    \begin{align*}
+        H_{h \to g,d}^{(\bullet)}(\lambda_1, \ldots, \lambda_n) &= \sum_{[f]}\frac{1}{|Aut(f)|}\\
+        &= \sum_{[f]} \frac{m_f}{d!}\\
+        &= \frac{|M|}{d!} \qedhere
+    \end{align*}
+\end{proof}
+
+\begin{theorem}
+    The connected and disconnected Hurwitz numbers are finite.
+\end{theorem}
+
+\begin{proof}
+    The fundamental group of a Riemann surface with \(n\) punctures is presented by \(2g+n\) generators, so the number of monodromy representations is finite and by the above theorem also the Hurwitz numbers.
+\end{proof}
+
+\begin{example}\label{ex:genus0numbers}
+    The easiest example of Hurwitz number is \(H_{0 \to 0, d}((d),(d))\), so let's calculate it. Note that since there exists at least 1 fully ramified point, connected and disconnected Hurwitz numbers coincide. Geometrically, we can proceed as follows: we know that degree \(d\) meromorphic functions on the Riemann sphere ramified only at \(r_1\) and \(r_2\) are of the form
+    \[
+    f(x) = b\frac{(x-r_1)^d}{(x-r_2)^d}
+    \]
+    With a coordinate change, one sees that this cover is isomorphic to \(p(x) = x^d\), then there is only one isomorphism class. At this point one compute the automorphisms of \(p(x)\) that are \(d\). Now let's calculate the Hurwitz number using monodromy.
+    A Hurwitz cover corresponds to two \(d\)-cycles in \(S_d\) such that the product gives the identity. Fixed a \(d\)-cycle, the second must be its inverse, then there are as many Hurwitz covers as the \(d\)-cycles, that is \((d-1)!\) . 
+    Therefore \(H_{0 \to 0, d}((d),(d)) = \frac{1}{d}\). This example shows what a powerful method the monodromy is.
+\end{example}
+
+\begin{example}[Hyperelliptic curves]
+A Hyperelliptic curve is a Riemann surface that admits a degree \(2\) meromorphic function on it. Where the degree of a meromorphic function is the degree of the associated holomorphic map to \(\PP\).
+
+Given \(\PP\) we want to count the degree \(2\) Hurwitz covers. If we require that the source surface is of genus \(g\) by the Riemann-Hurwitz formula, it has exactly \(2g+2\) branch points. Since the degree is \(2\), a point \(x\) is ramified if and only if \(k_x = 2\), then a hyperelliptic cover has only simple ramification. Since a branch point always exists, there is a 2-cycle in the image of the monodromy representation; therefore, the Hurwitz number is connected. By Theorem \ref{th:monp1} we have to select \(2g+2\) permutations in \(S_2\) such that their product is the identity. In \(S_2\), there is only one \(2\)-cycle and its even powers are the identity. Then, there is only one monodromy representation. We have proved the following.
+\[
+H_{g \to 0, 2}^{2g+2}= H_{g \to 0, 2}^{2g+2, \bullet} = \frac{1}{2}
+\]
+Moreover this shows that given \(2g+2\) points in \(\PP\) there exists, up to isomorphism, only one hyperelliptic cover branched in those points.
+\end{example}
+
+\begin{example}[Degree 2 Hurwitz numbers]
+    Our goal now is to calculate all degree \(2\) Hurwitz numbers. Fix a genus g Riemann surface \(Y\) and \(b_1, \ldots, b_r\) branch points, then the ramification profile is uniquely determined i.e. there are only simple ramifications. By Riemann-Hurwitz \(r= 2h+2-4g\), thus \(r\) must be even. From the standard presentation of the fundamental group of an \(r\)-punctured, genus \(g\) Riemann surface, we have to choose \(r\) transpositions in \(S_2\), \(\sigma_1, \ldots, \sigma_r\) and \(a_1,b_1, \ldots, a_g,b_g\) other permutations, such that
+    \[
+    [a_g,b_g] \ldots [a_1,b_1] \sigma_r \ldots \sigma_1 = e.
+    \]
+    The choice of the \(\sigma_i\)'s is necessarily \((1,2)\). Since \(S_2\) is abelian, the condition on the commutators is always satisfied and since \(r\) is even \((1,2)^r = e\).
+    There are \(2^{2g}\) ways to select \(a_i\)'s and \(b_i\)'s, thus
+    \[
+    H^{r,\bullet}_{h \to g,2}= 2^{2g-1}
+    \]
+    If \(r>1\) there is always a two cycle in the image, then disconnected and connected Hurwitz numbers coincide. If \(r=0\) to be transitive the image must contain a two cycle, thus the only case that doesn't work is when \(a_i = b_i = e\) for every \(i\), then \(H^0_{h \to g,2} = \frac{2^{2g}-1}{2}\).
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%THIRD CHAPTER
+\chapter{Counting Maps}\label{chap.CountMaps}
+\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
+
+\section{Representation Theory of \(S_d\)}
+Representation theory is a vast topic in mathematics. In this section, we introduce only the essential tools and state the key theorems necessary for the continuation of the thesis, without providing their proofs. Our primary goal is to use representation theory to prove the Burnside formula, providing a powerful method to compute Hurwitz numbers.
+
+\begin{definition}
+    The group algebra of a given group \(G\) is the complex vector space \(\C[G]\) i.e. the \(\C\) vector space spanned by the elements of the group. This is also an algebra with the multiplication of the group extended by linearity.
+\end{definition}
+
+\begin{definition}
+    We call class algebra of \(G\) the center of the group algebra
+    \[
+    \ZZ \C[G] = \{x \in \C[G] \mid \; xy = yx \; \forall \, y \in \C[G]\}.
+    \]
+\end{definition}
+
+\begin{definition}
+     A finite representation of a group \(G\) is equivalently
+     \begin{itemize}
+         \item A group action \(\rho:G \to End(V)\) where \(V\) is a finite dimensional vector space.
+         \item A finitely generated \(\C[G]\)-module.
+     \end{itemize}
+     We call dimension of our representation dim \(V\).
+\end{definition}
+
+\begin{remark}\label{rem:equivalence-def-representation}
+The above definitions are equivalent, indeed given a group action \(\rho: G \to End(V)\) we can define a structure of \(\C[G]\)-module over \(V\). Take \(g \in G\) and \(v \in V\). We define the scalar multiplication \(g \cdot v = \rho(g)(v)\) and we extend it by linearity. If we have a \(\C[G]\)-module \(M\) we can construct the representation \(\rho(g)(v) = g \cdot v\).
+\end{remark}
+
+\begin{definition}
+    Given a representation \(\rho:G \to End(V)\) we call subrepresentation a \(\rho(g)\) invariant subspace \(V' \subseteq V\) for every \(g \in G\). Equivalently a \(\C[G]\)-submodule.
+    We say that a representation is irreducible if it does not contain non-trivial subrepresentations.
+\end{definition}
+
+\begin{definition}
+    Two representations \(M\) and \(N\) are said to be isomorphic if they are isomorphic as modules.
+\end{definition}
+
+From now on, our intention is to work only with the symmetric group \(S_d\).
+
+\begin{example}
+    We can let \(S_d\) act trivially over \(\C\) by setting \(\rho(\sigma)(z) = z\). This is called the trivial representation, it has dimension one, and it is irreducible.
+\end{example}
+
+\begin{example}
+    Another irreducible representation of \(S_d\) of dimension one is the sign representation
+    \[
+        \parbox{2cm}{\centering \(\rho(\sigma)(z) = \)}
+        \biggl\{
+        \parbox{3cm}{\centering \(z\) if \(\sigma\) is even\\
+        \(-z\) if \(\sigma\) is odd}
+    \]
+\end{example}
+
+\begin{example}
+    Let \(V\) be a \(d\)-dimensional vector space and consider \(\{e_1 \ldots e_d\}\) a basis. We can define the permutation representation \(\rho(\sigma)(e_i)=e_{\sigma(i)}\).
+    The span of \(e_1 + \ldots + e_d\) is an invariant subspace; therefore, \(\rho\) is not irreducible.
+\end{example}
+
+\begin{example}
+    Another important representation is the regular representation given by \(\C[S_d]\) as module over itself.
+\end{example}
+
+Now we state three important results of representation theory without giving the proof.
+
+\begin{theorem}
+    Every representation of \(S_d\) decomposes uniquely as a sum of irreducible subrepresentations.
+\end{theorem}
+
+\begin{theorem}
+    The number of irreducible representations of \(S_d\), up to isomorphism, equals the number of conjugacy classes of \(S_d\), which is the number of partitions of \(d\).
+\end{theorem}
+
+\begin{theorem}
+    The regular representation decomposes as
+    \[
+    \C[S_d] = \bigoplus_{\rho} M_{\rho}^{\oplus \; \text{dim}\, \rho},
+    \]
+    where the sum runs over all the irreducible representation of \(S_d\).
+\end{theorem}
+
+\begin{remark}
+    From this it immediately follows that
+    \[
+    d! = \sum_{\rho} (\text{dim}\, \rho)^2.
+    \]
+\end{remark}
+
+\begin{definition}
+    Let \(\rho : S_d \to End(V)\) be a representation of \(S_d\). Given a basis for \(V\), the representation can be viewed as \(\Phi : S_d \to GL_n(\C)\). Then, we can define the function \(\chi_{\rho} : S_d \to \C\), called character of \(\rho\) as
+    \[
+    \chi_{\rho}(\sigma) = \text{trace}(\Phi(\sigma)).
+    \]
+\end{definition}
+
+\begin{remark}
+Because the trace is invariant under change of basis, the following facts hold
+\begin{enumerate}
+    \item The character is independent from the choice of a basis and hence it is well defined.
+    \item The character is constant along conjugacy classes.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}
+    Other two proprieties of the character functions are
+    \begin{enumerate}
+        \item \(\chi_{\rho}(e) = \text{dim} \, \rho\);
+        \item \(\chi_{\rho_1 \oplus \rho_2}(\sigma) = \chi_{\rho_1}(\sigma) + \chi_{\rho_2}(\sigma) \).
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+    Functions \(f : S_d \to \C\) constant along conjugacy classes are called class functions. They form a complex vector space. We can define an inner product on this vector space as follows
+    \[
+    \langle \alpha , \beta \rangle = \frac{1}{d!} \sum_{\sigma \in S_d} \alpha(\sigma) \overline{\beta(\sigma)}.
+    \]
+\end{definition}
+
+\begin{proposition}
+    Characters of irreducible representations of \(S_d\) form an orthonormal basis for the vector space of class functions, i.e.
+    \[
+        \parbox{2.5cm}{\centering \(\langle \chi_{\rho_1}, \chi_{\rho_2} \rangle =\)}
+        \biggl\{
+        \parbox{2.5cm}{\centering \(1 \quad\) if \(\rho_1 \simeq \rho_2\) \\
+        \(0 \quad\) if \(\rho_1 \not \simeq \rho_2\)}
+    \]
+    Where \(\rho_1\) and \(\rho_2\) are irreducible representations.
+\end{proposition}
+
+\begin{remark}
+    Let \(\lambda \vdash d\) and consider \(C_{\lambda}\) given by the sum of all permutations in \(S_d\) of cycle type \(\lambda\). These elements form a conjugacy class, so for any permutation \(\sigma \in S_d\), \(\sigma C_{\lambda} \sigma^{-1}\) simply rearranges the terms. Thus, \(C_{\lambda} \in \ZZ \C[S_d]\).
+    Moreover, the \(C_{\lambda}\)'s form a basis of \(\ZZ \C[S_d]\) as complex vector space.
+\end{remark}
+
+\begin{theorem}\label{maschke}
+    The class algebra \(\ZZ \C[S_d]\) is a semisimple algebra, i.e. there exists a basis \(\{e_{\rho_1} \ldots e_{\rho_n}\}\) of idempotent elements, indexed by irreducible representations of \(S_d\). This means:
+            \[
+        \parbox{2.5cm}{\centering \(e_{\rho_i} \cdot e_{\rho_j} =\)}
+        \biggl\{
+        \parbox{3.5cm}{\centering \(e_{\rho_i} \;\) if \(e_{\rho_i} = e_{\rho_j}\) \\
+        \(0 \quad\) otherwise}
+    \]
+    Furthermore, the following changes of basis hold
+    \[
+    e_{\rho} = \frac{\text{dim} \, \rho}{d!} \sum_{\lambda \vdash d}\chi_{\rho}(\lambda)C_{\lambda}
+    \qquad \qquad
+    C_{\lambda} = |C_{\lambda}| \sum_{\rho} \frac{\chi_{\rho}(\lambda)}{\text{dim} \, \rho}e_{\rho}
+    \]
+\end{theorem}
+
+\begin{example}\label{ex:character-table-S3}
+    Now we describe all irreducible representations of \(S_3\) and compute its character table. There are \(3\) irreducible representations and we already know two of them: the sign and the trivial representation. So the third has dimension \(2\) and we call it the standard representation \(\rho_s\). The trivial representation is given by the matrix \((1)\) for every permutation and so the character function is constant \(1\). The sign representation is given by the matrix \((1)\) for even permutations and \((-1)\) for odd permutations. We know that the regular representation decomposes as \(\rho_r = \rho_1 \oplus \rho_{-1} \oplus (\rho_s)^2\) and then
+    \[
+    \chi_{\rho_r} = \chi_{\rho_1} + \chi_{\rho_{-1}} + 2\chi_{\rho_s}.
+    \]
+    It's not hard to see that the character of the regular representation is the number of fixed points of the action associated to \(\C[S_d]\) as in \ref{rem:equivalence-def-representation}. Since \(\rho_r\) acts by left multiplication, then \(\chi_{\rho_{r}}(\sigma) = 0\) if \(\sigma \neq e\) and \(\chi_{\rho_{r}}(e) = 6\). From this we can calculate the character of \(\rho_s\).
+    In conclusion, we have the following character table of \(S_3\).
+\end{example}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{c|c c c}
+    \(S_3\) & \(C_e\) & \(C_{(2,1)}\) & \(C_{(3)}\) \\
+    \hline
+    \hline
+    \(\rho_1\) & 1 & 1 & 1\\
+    
+    \(\rho_{-1}\) & 1 & -1 & 1\\
+    
+    \(\rho_s\) & 2 & 0 & -1\\
+    \end{tabular}
+    \caption{Characters of \(S_3\)}
+\end{table}
+
+\section{Counting Maps Via Representation Theory}
+
+\begin{theorem}
+    The following formula for disconnected Hurwitz numbers holds
+    \[
+    H_{h \to g , d}^{\bullet}(\lambda_1, \ldots, \lambda_n) = \frac{1}{d!}[C_e] 
+    \bigl(\sum_{\nu \vdash d}|\xi(\nu)| C_{\nu}^2\bigr)^g C_{\lambda_n} \ldots C_{\lambda_1}
+    \]
+    Where \(\xi(\nu)\) is the centralizer of any permutation of cycle type \(\lambda\) and \([C_e]x\) denotes the coefficient of \(C_e\) after writing \(x\) as a linear combinations of the basis elements \(C_{\lambda}\).
+\end{theorem}
+
+\begin{proof}
+    Recall that the fundamental group of an \(n\)-punctured, genus \(g\) Riemann surface is presented as follows
+    \[
+    \langle \rho_1, \ldots, \rho_n, \alpha_1, \beta_1, \ldots \alpha_g, \beta_g \mid \rho_1 \ldots \rho_n \prod_{i=1}^g [\alpha_i, \beta_i] = e \rangle,
+    \]
+    where \([\alpha, \beta] = \alpha \beta \alpha^{-1} \beta^{-1}\). Thus, we have to choose \(\sigma_1, \ldots, \sigma_n, a_1,b_1, \ldots, a_g,b_g \in S_d\) such that each \(\sigma_i\)'s has cycle type \(\lambda_i\) and \( [a_g, b_g] \ldots [a_1,b_1]\sigma_n \ldots \sigma_1 = e\).
+    We can consider ordered monomials in the class algebra of the form
+    \[
+    \hat{a}_g a_g\ldots \hat{a}_1a_1\sigma_n \ldots \sigma_1,
+    \]
+    where \(\hat{a}_i = b_i^{-1}a_i^{-1}b_i\).
+    Monomials of this type appear in the formal expansion of
+    \[
+    \bigl(\sum_{\nu \vdash d} C_{\nu}^2\bigr)^g C_{\lambda_n} \ldots C_{\lambda_1}.
+    \]
+    Now observe that since \(\hat{a_i}\) and \(a_i\) are in the same conjugacy class there are \(\xi(a_i)\) way to obtain the same permutation \(\hat{a}_i a_i = (b_i^{-1}a_i^{-1}b_i)a_i\). Then, each monomial gives \(\prod_{i=1}^g |\xi(a_i)|\) monodromy representations. Then, the number of monodromy representations is the coefficient of the identity in the product
+    \(\bigl(\sum_{\nu \vdash d}|\xi(\nu)| C_{\nu}^2\bigr)^g C_{\lambda_n} \ldots C_{\lambda_1}\), which concludes the proof.
+\end{proof}
+
+\begin{theorem}[Burnside]
+    \[
+    H_{h \to g , d}^{\bullet}(\lambda_1, \ldots, \lambda_n) =
+    \sum_{\rho} \biggl(\frac{\text{dim}\, \rho}{d!}\biggr)^{2-2g} \prod_{j=1}^n
+    \frac{|C_{\lambda_j}| \, \chi_{\rho}(\lambda_j)}{\text{dim}\,\rho},
+    \]
+    where the sum runs over all irreducible representations of \(S_d\).
+\end{theorem}
+
+\begin{proof}
+    We start from the formula in the previous theorem and apply the change of basis given in the Theorem \ref{maschke}. To begin with, consider
+    \begin{align*}
+        \sum_{\nu \vdash d} |\xi(\nu)|C_{\nu}^2
+        & =\sum_{\nu \vdash d} |\xi(\nu)| \biggl( \sum_{\rho} \frac{|C_{\nu}| \chi_{\rho}(\nu)}{\text{dim}\, \rho} e_{\rho} \biggr)^2 \\
+        & =\sum_{\nu \vdash d} |\xi(\nu)| \sum_{\rho} \biggl( \frac{|C_{\nu}| \chi_{\rho}(\nu)}{\text{dim}\, \rho}\biggr)^2 e_{\rho}\\
+        & =\sum_{\rho} \frac{d!}{(\text{dim}\, \rho)^2} \biggl( \sum_{\nu \vdash d} |C_{\nu}|\chi_{\rho}(\nu)^2\biggr) e_{\rho}.
+    \end{align*}
+    Where we have applied the orthogonality and idempotence of the basis and the fact \(d! = |\xi(\nu)| |C_{\nu}|\). We know that character are constant along conjugacy classes, then
+    \[
+    |C_{\nu}|\chi_{\rho}(\nu)^2 = \sum_{\sigma \in C_{\nu}} \chi_{\rho}(\sigma)^2
+    \]
+    Summing over all \(\nu\) we obtain
+    \[
+    \sum_{\nu \vdash d} |C_{\nu}|\chi_{\rho}(\nu)^2 = \sum_{\sigma \in S_d} \chi_{\rho}(\sigma)^2
+    \]
+    Where the right term is the inner product \(\langle \chi_{\rho},\chi_{\rho} \rangle = 1\) times \(d!\) . We have arrived to
+    \[\sum_{\nu \vdash d} |\xi(\nu)|C_{\nu}^2 = \sum_{\rho} \biggl(\frac{d!}{\text{dim}\, \rho}\biggr)^2  e_{\rho}\]
+    Next we consider the product
+    \begin{align*}
+        C_{\lambda_n} \ldots C_{\lambda_1} &= \biggl( \sum_{\rho} \frac{|C_{\lambda_n}| \chi_{\rho}(\lambda_n)}{\text{dim}\, \rho} e_{\rho} \biggr) \ldots \biggl( \sum_{\rho} \frac{|C_{\lambda_1}| \chi_{\rho}(\lambda_1)}{\text{dim}\, \rho} e_{\rho} \biggr)\\
+        &= \sum_{\rho} \prod_{j=1}^n \biggl( \frac{|C_{\lambda_j}| \chi_{\rho}(\lambda_j)}{\text{dim}\, \rho}\biggr) e_{\rho}
+    \end{align*}
+    Putting everything together we have
+    \[
+    H_{h \to g , d}^{\bullet}(\lambda_1, \ldots, \lambda_n) =
+    \frac{1}{d!} [C_e] \sum_{\rho} \biggl(\frac{d!}{\text{dim}\, \rho}\biggr)^{2g} \prod_{j=1}^n \biggl( \frac{|C_{\lambda_j}| \chi_{\rho}(\lambda_j)}{\text{dim}\, \rho}\biggr)  e_{\rho}
+    \]
+    Remember that we only have to consider the coefficient of \(C_e\). Applying the inverse change of basis
+    \[
+    e_{\rho} = \frac{\text{dim} \, \rho}{d!} \chi_{\rho}(e)C_e + \ldots
+    \]
+    and using the identity \(\chi_{\rho}(e) = \text{dim} \, \rho\) the thesis follows.
+\end{proof}
+
+\begin{example}
+From Riemann-Hurwitz a map between genus \(1\) Riemann surfaces must be unramified. Applying the Burnside formula to this set of data, it follows immediately that
+\[
+H^{\bullet}_{1 \to 1, d} = \text{Number of partitions of \(d\)}.
+\]
+\end{example}
+
+\begin{example}\label{ex:degree-3-Hurwitz-numbers}
+    Now we can apply the Burnside formula together with \ref{ex:character-table-S3} for computing all degree \(3\) disconnected Hurwitz numbers \(H^{\bullet}_{h \to g,3}((3)^m, (1,2)^{2n})\), where \(h = 3g - 2 + m + n\) is determined by the Riemann-Hurwitz formula.
+    
+    If \(n,m > 0\) disconnected and connected Hurwitz numbers coincide and
+    \begin{align*}
+    H_{h \to g,3}((3)^m, (1,2)^{2n})  &=
+    \sum_{\rho} \biggl(\frac{\text{dim}\, \rho}{6}\biggr)^{2-2g}
+    \biggl(\frac{|C_{(3)}| \, \chi_{\rho}((3))}{\text{dim}\,\rho}\biggr)^m
+    \biggl(\frac{|C_{(2,1)}| \, \chi_{\rho}((2,1))}{\text{dim}\,\rho}\biggr)^{2n} \\
+    &= \biggl(\frac{1}{6}\biggr)^{2-2g}
+    \biggl(\frac{2 \cdot 1}{1}\biggr)^m
+    \biggl(\frac{3 \cdot 1}{1}\biggr)^{2n} \\
+    & + \biggl(\frac{1}{6}\biggr)^{2-2g}
+    \biggl(\frac{2 \cdot 1}{1}\biggr)^m
+    \biggl(\frac{3 \cdot (-1)}{1}\biggr)^{2n} \\
+    & + \biggl(\frac{2}{6}\biggr)^{2-2g}
+    \biggl(\frac{2 \cdot (-1)}{2}\biggr)^m
+    \biggl(\frac{3 \cdot 0}{2}\biggr)^{2n} \\
+    &= \biggl(\frac{1}{6}\biggr)^{2-2g} 2^m 3^{2n} + \biggl(\frac{1}{6}\biggr)^{2-2g} 2^m (-3)^{2n}\\
+    &= 2^{m+2g-1}\,3^{2n+2g-2}
+    \end{align*}
+    If \(n = 0\) the third summand doesn't vanish, thus
+    \begin{align*}
+    H_{h \to g,3}((3)^m)  &= \biggl(\frac{1}{6}\biggr)^{2-2g}
+    \biggl(\frac{2 \cdot 1}{1}\biggr)^m 
+    + \biggl(\frac{1}{6}\biggr)^{2-2g}
+    \biggl(\frac{2 \cdot 1}{1}\biggr)^m 
+    + \biggl(\frac{2}{6}\biggr)^{2-2g}
+    \biggl(\frac{2 \cdot (-1)}{2}\biggr)^m \\
+    &= \biggl(\frac{1}{6}\biggr)^{2-2g}\, (2^{m+1} + 2^{2-2g}\, (-1)^m)
+    \end{align*}
+    If \(m=0\) the first calculation is still valid but only for the disconnected case.
+\end{example}
+
+\section{Hurwitz Potential}
+
+\begin{definition}
+    We define the genus \(g\) (disconnected) Hurwitz potential as
+    \[
+    \H(p_{i,j}, u, z, q) = \sum H^{r, (\bullet)}_{h \to g, d}(\lambda_1 \ldots \lambda_n) p_{1,\lambda_1} \ldots p_{n,\lambda_n} \frac{u^r}{r!}z^{1-h}q^d.
+    \]
+    Where
+    \begin{itemize}
+        \item Given a partition \(\lambda = (l_1 \ldots l_k)\), then \(p_{i,\lambda}\) is defined as
+        \[
+        p_{i,\lambda} = \prod_{j=1}^k p_{i,l_j}
+        \]
+        where the \(p_{i,j}\)'s keep track of the ramification profiles;
+        \item \(u\) is a variable for the simple ramification;
+        \item \(z\) indexes \(\frac{1}{2}\) the topological Euler characteristic and hence the genus;
+        \item \(q\) is for the degree.
+    \end{itemize}
+
+    The total (disconnected) Hurwitz potential is defined as \(\H^{(\bullet)} = \sum_{g} \H^{(\bullet)}_g\)
+\end{definition}
+
+\begin{theorem}
+    The connected and disconnected genus \(g\) Hurwitz potentials are related by
+    \[
+    \H_g^{\bullet} + 1 = e^{\H_g}.
+    \]
+\end{theorem}
+
+\begin{proof}
+    \cite[Ch. 10, Thm. 10.2.1, p. 134]{CM16}
+\end{proof}
+
+If we look only at the simple Hurwitz numbers and consider the disconnected genus \(g\) simple Hurwitz potential
+\[
+\mathfrak{S}^{\bullet}_g(p_j,u,z,q) = \sum H^{r, \bullet}_{h \to g, d}(\lambda) p_{\lambda}\frac{u^r}{r!}z^{1-h}q^d.
+\]
+We have the following result
+
+\begin{theorem}
+    The disconnected genus \(g\) simple Hurwitz potential \(\mathfrak{S}^{\bullet}_g\) satisfies the following PDE
+    \[
+    \frac{\de}{\de u} \mathfrak{S}^{\bullet}_g = \frac{1}{2} \sum_{i,j \geq 1} ij p_{i+j}z \frac{\de^2}{\de p_i \de p_j} \mathfrak{S}^{\bullet}_g + (i + j) p_i p_j \frac{\de}{\de p_{i+j}} \mathfrak{S}^{\bullet}_g.
+    \]
+\end{theorem}
+
+\begin{proof}
+    \cite[Ch. 10, Thm. 1.3.4, p. 139]{CM16}
+\end{proof}
+
+\section{Degeneration Formula}
+
+\begin{theorem}[\textbf{Base curve of genus 0: reducing branch points}]
+    \begin{align*}
+        & H_{g \to 0 , d}^{\bullet}(\lambda_1, \ldots, \lambda_s, \mu_1, \ldots, \mu_t) \\
+        & = \sum_{\nu \vdash d} |\xi(\nu)| H_{g_1 \to 0 , d}^{\bullet}(\lambda_1, \ldots, \lambda_s, \nu) H_{g_2 \to 0 , d}^{\bullet}(\nu, \mu_1, \ldots, \mu_t),
+        \end{align*}
+        where \(g_1\) and \(g_2\) are determined by the Riemann-Hurwitz formula and satisfy the condition \(g_1 + g_2 + l(\nu) -1 = g\).
+\end{theorem}
+
+\begin{proof}
+    Denote \(M\) the set of monodromy representations corresponding to tuples\\ \((\sigma_1, \ldots, \sigma_s, \omega_1, \ldots, \omega_t)\) such that the product is the
+    identity and the permutations have the chosen cycle type.
+    Denote \(N_{\lambda,\nu}\) the set of tuples \((\sigma_1, \ldots, \sigma_s, \pi_1)\) computing\\ \(H_{g_1 \to 0 , d}^{\bullet}(\lambda_1, \ldots, \lambda_s, \nu)\) where \(\pi_1\) has cyclic type \(\nu\) and similarly for \(N_{\nu , \omega}\).
+    We can consider the subset \(P \subseteq N_{\lambda,\nu} \times N_{\nu,\omega}\) where \(\pi_1 = \pi_2^{-1}\). Set \(\pi = \sigma_s \ldots \sigma_1\) and define the function \(M \to P\)
+    \[
+    (\sigma_1, \ldots, \sigma_s,\omega_1, \ldots, \omega_t) \mapsto [(\sigma_1, \ldots, \sigma_s,\pi),(\pi^{-1}, \omega_1, \ldots, \omega_t)].
+    \]
+    It is of course injective and it is surjective because the product of the permutations in a tuple \((\sigma_1, \ldots, \sigma_s,\pi)\) must be the identity. Then we have shown that \(M\) and \(P\) have the same cardinality. Now we observe that
+    \[
+    |P| = \sum_{\nu \vdash d} \frac{1}{|C_{\nu}|} |N_{\lambda,\nu}| |N_{\nu,\omega}|.
+    \]
+    Where we divided by \(|C_{\nu}|\) because the two permutations \(\pi_1\) and \(\pi_2\) must be inverse to each other and not just in the same conjugacy class. The formula follows from the identity \(d! = |C_{\nu}||\xi(\nu)|\).
+    \end{proof}
+
+\begin{theorem}[\textbf{Reducing the genus of the base curve}]
+    \[
+    H_{h \to g , d}^{\bullet}(\lambda_1, \ldots, \lambda_s) =
+    \sum_{\nu \vdash d} |\xi(\nu)| H_{h-l(v) \to g-1 , d}^{\bullet}(\nu,\nu, \lambda_1, \ldots, \lambda_s).
+    \]
+\end{theorem}
+
+\begin{proof}
+     Let \(M\) be the set of monodromy representations corresponding to tuples\\ \((\sigma_1, \ldots, \sigma_s,a_1,b_1, \ldots,a_g,b_g)\) such that each \(\sigma_i\) has cycle type \(\lambda_i\) and satisfying the relation coming from the standard presentation of the fundamental group of an \(s\)-punctured, genus \(g\) Riemann surface:
+    \[
+    [a_g, b_g] \ldots [a_1,b_1]\sigma_s \ldots \sigma_1 = e.
+    \]
+    Define the set \(N_{\nu}\) of tuples \((\omega_1, \ldots, \omega_s,\pi_1,\pi_2,\alpha_1,\beta_1, \ldots,\alpha_{g-1},\beta_{g-1})\) where \(\pi_1\) and \(\pi_2\) have cycle type \(\nu\), the \(\omega_i\)'s have cycle type \(\lambda_i\), and \([\alpha_{g-1}, \beta_{g-1}] \ldots [\alpha_1,\beta_1] \pi_2 \pi_1 \omega_s \ldots \omega_1  = e\).
+    We define the function \(M \to \bigcup_{\nu \vdash d} N_{\nu}\)
+    \[
+    (\sigma_1, \ldots, \sigma_s,a_1,b_1, \ldots,a_{g},b_{g}) \mapsto
+    (\sigma_1, \ldots, \sigma_s,b_1^{-1},a_1 b_1 a_1^{-1},a_2,b_2,\ldots,a_{g},b_{g}).
+    \]
+    This function is well defined because \(a_1 b_1 a_1^{-1}\) and \(b_1^{-1}\) are conjugate and thus have the same cycle type. Moreover the relation imposed from the presentation of the fundamental group is satisfied.
+    Given a tuple \((\omega_1, \ldots, \omega_s,\pi_1,\pi_2,\alpha_1,\beta_1, \ldots,\alpha_{g-1},\beta_{g-1})\) this is in the image of the function if the following equations are satisfied:
+    \begin{align*}
+        &\pi_2 = b_1^{-1},\\
+        &\pi_1 = a_1 b_1 a_1^{-1} .
+    \end{align*}
+    There are exactly \(|\xi(\nu)|\) solution. In particular the function is surjective and the following identity holds
+    \[
+        |M| = \sum_{\nu \vdash d} |\xi(\nu)| |N_{\nu}|.
+    \]
+    Then the theorem is proved.
+\end{proof}
+
+\begin{corollary}
+    All disconnected degree \(d\) Hurwitz numbers are determined in terms of Hurwitz numbers of the form \(H_{g \to 0 , d}^{\bullet}(\lambda_1,\lambda_2,\lambda_3)\).
+ \end{corollary}
+
+\begin{example}
+    Let's calculate \(H_{2 \to 1,2}((2),(2))\) with the degeneration formula.
+    \begin{align*}
+    H_{2 \to 1,2}((2),(2)) &= \sum_{\nu \vdash 2}|\xi(\nu)|H^{\bullet}_{2-\ell(\nu) \to 0,2}(\nu,\nu, (2),(2)) \\
+    &= 2 H_{0 \to 0,2}((2)^2) + 2 H_{1 \to 0,2}((2)^4) = 2
+    \end{align*}
+    We have already calculated \(H_{0 \to 0,2}((2)^2) = H_{1 \to 0,2}((2)^4) = \frac{1}{2}\) in section \ref{sec:countingmonodromy}.
+\end{example}
+
+\section{Tropical Theory}
+
+\begin{definition}[Monodromy graph]
+    Fix \(g\) and two partitions \(\mu = (\mu_1, \ldots, \mu_k)\) and \(\nu=(\nu_1, \ldots, \nu_l)\) of an integer \(d > 0\). Denote by \(r = 2g-2 + k + l\) the number of simple branch points determined by the Riemann-Hurwitz formula. Monodromy graphs over a segment \([0,r+1]\) are constructed as follows:
+    \begin{enumerate}
+        \item start with \(k\) segments over \(0\) labeled \(\mu_1, \ldots, \mu_k\). The \(\mu_i\)'s are called weights.
+        \item Over the point \(1\) create a three valent vertex by joining two strands or splitting one with weight greater than \(1\). In case of a join, label the new edge with the sum of the weights of the joined strands. In case of a split, label the new strands with all the possible pairs of numbers adding to the weight of the split edge.
+        \item Consider only one representative for any isomorphism class of labeled graphs.
+        \item Repeat \(2\) and \(3\) for all successive integers up to \(r\)
+        \item Terminate the graph with \(l\) points of weight \(\nu_1, \ldots, \nu_l\) over \(r+1\).
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    In a monodromy graph, a Wiener consists of a strand of weight \(2n\) splitting into two strands of weigth \(n\) and then re-joining. A balanced fork is a tripod with weights \(n, n, 2n\) such that the vertices of weight \(n\) lie over \(0\) or \(r+1\), as illustrated in the following pictures.
+\end{definition}
+
+\begin{tabular}{ccc}
+    \begin{tikzpicture}
+        % Coordinate dei vertici
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (2.2,0);
+        \coordinate (C) at (4,1);
+        \coordinate (D) at (4,-1);
+        \coordinate (E) at (0,-1.5);
+        \coordinate (F) at (4,-1.5);
+    
+        % Disegna i vertici
+        \filldraw (F) circle (1.5pt) node[below] {$r+1$};
+        \filldraw (2.2,-1.5) circle (1.5pt) node[below] {$r$};
+        
+        % Disegna i segmenti
+        \draw (A) -- (B) node[midway, above] {$2n$};
+        \draw (B) -- (C) node[midway, above left] {$n$};
+        \draw (B) -- (D) node[midway, below left] {$n$};
+        \draw (E) -- (F);
+        
+    \end{tikzpicture}
+    &
+    \begin{tikzpicture}
+        % Coordinate dei vertici
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (-2.2,0);
+        \coordinate (C) at (-4,1);
+        \coordinate (D) at (-4,-1);
+        \coordinate (E) at (0,-1.5);
+        \coordinate (F) at (-4,-1.5);
+    
+        % Disegna i vertici
+        \filldraw (F) circle (1.5pt) node[below] {$0$};
+        \filldraw (-2.2,-1.5) circle (1.5pt) node[below] {$1$};
+        
+        % Disegna i segmenti
+        \draw (A) -- (B) node[midway, above] {$2n$};
+        \draw (B) -- (C) node[midway, above right] {$n$};
+        \draw (B) -- (D) node[midway, below right] {$n$};
+        \draw (E) -- (F);
+        
+    \end{tikzpicture}
+    &
+    \begin{tikzpicture}
+        % Coordinate dei vertici
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (1,0);
+        \coordinate (C) at (3,0);
+        \coordinate (D) at (4,0);
+    
+        % Disegna i segmenti principali
+        \draw (A) -- (B) node[midway, above] {$2n$};
+        \draw (C) -- (D) node[midway, above] {$2n$};
+        \draw (2,0) ellipse (1cm and 0.3cm);
+        \draw (0,-1.5) -- (4,-1.5);
+    
+        % Etichette
+        \node at (2,0.4) [above] {$n$};
+        \node at (2,-0.4) [below] {$n$};
+
+        % Disegna i vertici
+        \filldraw (1,-1.5) circle (1.5pt) node[below] {$s$};
+        \filldraw (3,-1.5) circle (1.5pt) node[below] {$s+1$};
+        
+    \end{tikzpicture}
+    \\
+    Balanced right fork & Balanced left fork & Wiener
+\end{tabular}
+
+\begin{definition}
+Fix \(g\) and let \(\nu\) and \(\mu\) be two partitions of an integer \(d > 0\). The tropical double Hurwitz number is defined as follows
+    \[
+    H^{trop}_{g \to 0,d}(\mu,\nu) = \sum_{\Gamma} \frac{1}{|Aut(\Gamma)|} \prod_e \omega(e).
+    \]
+    Where \(\Gamma\) is a monodromy graph and the product goes over all interior edge weights.
+\end{definition}
+
+\begin{theorem}[Cavalieri, Johnson and Markwig]
+    \[
+    H^{trop}_{g \to 0,d}(\mu,\nu) = H_{g \to 0,d}(\mu,\nu).
+    \]
+    Moreover the only automorphisms arise due to wieners and balanced forks. It follows that the classical double Hurwitz numbers can be calculated as
+    \[
+    H^r_{g \to 0,d}(\mu,\nu) = \sum_{\Gamma} \biggl(\frac{1}{2}\biggr)^{\#\text{wieners} + \#\text{b.forks}} \prod_e \omega(e).
+    \]
+\end{theorem}
+
+\begin{proof}
+    \cite[Cor. 4.4, p. 247]{CJM10}
+\end{proof}
+
+\begin{example}
+    In order to understand tropical Hurwitz numbers we compute 
+    \[
+    H^{trop}_{1 \to 0,4}((4),(2,2)) = 14.
+    \]
+    The following table shows the type of contributing graphs and the various contributions, then summing the numbers in the last column we get the result.
+    
+    \vspace{10pt}
+    \begin{tabular}{ccccc}
+    \hline
+    \textbf{Monodromy graph} & \textbf{n. wieners} & \textbf{n. b. forks}& $\prod \omega(e)$ & \textbf{Total} \\
+    \hline
+    \begin{tikzpicture}[baseline=(current bounding box.center)]
+        % Disegna i segmenti principali
+        \draw (0,0) -- (1,0) node[midway, above] {$4$};
+        \draw (2.5,0) -- (4,0) node[midway, above] {$4$};
+        \draw (4,0) -- (5,0.5) node[midway, above] {$2$};
+        \draw (4,0) -- (5,-0.5) node[midway, below] {$2$};
+        \draw (1.75,0) ellipse (0.75cm and 0.3cm);
+        \draw (0,-1.5) -- (5,-1.5);
+    
+        % Etichette
+        \node at (1.75,0.4) [above] {$1$};
+        \node at (1.75,-0.4) [below] {$3$};
+
+        % Disegna i vertici
+        \filldraw (0,-1.5) circle (1.5pt) node[below] {$0$};
+        \filldraw (1,-1.5) circle (1.5pt) node[below] {$1$};
+        \filldraw (2.5,-1.5) circle (1.5pt) node[below] {$2$};
+        \filldraw (4,-1.5) circle (1.5pt) node[below] {$3$};
+        \filldraw (5,-1.5) circle (1.5pt) node[below] {$4$};
+    \end{tikzpicture}
+    & 0 & 1 & 12 & 6\\
+    \hline
+    \begin{tikzpicture}[baseline=(current bounding box.center)]
+        % Disegna i segmenti principali
+        \draw (0,0) -- (1,0) node[midway, above] {$4$};
+        \draw (1,0) -- (5,0.5) node[midway, above] {$2$};
+        \draw (1,0) -- (2.5,-0.5) node[midway, below] {$2$};
+        \draw (4,-0.5) -- (5,-0.5) node[midway, above] {$2$};
+        \draw (3.25,-0.5) ellipse (0.75cm and 0.3cm);
+        \draw (0,-1.5) -- (5,-1.5);
+    
+        % Etichette
+        \node at (3.25,-0.25) [above] {$1$};
+        \node at (3.25,-0.8) [below] {$1$};
+
+        % Disegna i vertici
+        \filldraw (0,-1.5) circle (1.5pt) node[below] {$0$};
+        \filldraw (1,-1.5) circle (1.5pt) node[below] {$1$};
+        \filldraw (2.5,-1.5) circle (1.5pt) node[below] {$2$};
+        \filldraw (4,-1.5) circle (1.5pt) node[below] {$3$};
+        \filldraw (5,-1.5) circle (1.5pt) node[below] {$4$};
+    \end{tikzpicture}
+    & 1 & 0 & 2 & 1 \\
+    \hline
+    \begin{tikzpicture}[baseline=(current bounding box.center)]
+        % Disegna i segmenti principali
+        \draw (0,0) -- (1,0) node[midway, above] {$4$};
+        \draw (1,0) -- (3,-0.5) node[midway, below] {$3$};
+        \draw (1,0) -- (4,0.3) node[midway, above] {$1$};
+        \draw (4,0.3) -- (5,0.2) node[midway, above] {$2$};
+        \draw (3,-0.5) -- (4,0.3);
+        \draw (3,-0.5) -- (5,-0.3) node[midway, below] {$2$};
+        \draw (0,-1.5) -- (5,-1.5);
+
+        \node at (3.2,-0.3) [above] {$1$};
+
+        % Disegna i vertici
+        \filldraw (0,-1.5) circle (1.5pt) node[below] {$0$};
+        \filldraw (1,-1.5) circle (1.5pt) node[below] {$1$};
+        \filldraw (3,-1.5) circle (1.5pt) node[below] {$2$};
+        \filldraw (4,-1.5) circle (1.5pt) node[below] {$3$};
+        \filldraw (5,-1.5) circle (1.5pt) node[below] {$4$};
+    \end{tikzpicture}
+    & 0 & 0 & 3 & 3 \\
+    \hline
+    \begin{tikzpicture}[baseline=(current bounding box.center)]
+        % Disegna i segmenti principali
+        \draw (0,0) -- (1,0) node[midway, above] {$4$};
+        \draw (2.5,0) -- (4,0) node[midway, above] {$4$};
+        \draw (4,0) -- (5,0.5) node[midway, above] {$2$};
+        \draw (4,0) -- (5,-0.5) node[midway, below] {$2$};
+        \draw (1.75,0) ellipse (0.75cm and 0.3cm);
+        \draw (0,-1.5) -- (5,-1.5);
+    
+        % Etichette
+        \node at (1.75,0.4) [above] {$2$};
+        \node at (1.75,-0.4) [below] {$2$};
+
+        % Disegna i vertici
+        \filldraw (0,-1.5) circle (1.5pt) node[below] {$0$};
+        \filldraw (1,-1.5) circle (1.5pt) node[below] {$1$};
+        \filldraw (2.5,-1.5) circle (1.5pt) node[below] {$2$};
+        \filldraw (4,-1.5) circle (1.5pt) node[below] {$3$};
+        \filldraw (5,-1.5) circle (1.5pt) node[below] {$4$};
+    \end{tikzpicture}
+    & 1 & 1 & 16 & 4 \\
+    \hline
+\end{tabular}
+\end{example}
+
+\begin{example}
+    In example \ref{ex:degree-3-Hurwitz-numbers}, we have calculated the Hurwitz number
+    \[
+    H_{1 \to 0,3}((3)^2) = 2
+    \]
+    We can use tropical theory to calculate it and observe that the correspondence theorem is respected. The only possible monodromy graph is the following.
+
+    \begin{table}[h]
+    \centering
+    \begin{tikzpicture}
+        % Disegna i segmenti principali
+        \draw (0,0) -- (1.5,0) node[midway, above] {$3$};
+        \draw (3.5,0) -- (5,0) node[midway, above] {$3$};
+        \draw (2.5,0) ellipse (1cm and 0.3cm);
+        \draw (0,-1.1) -- (5,-1.1);
+    
+        % Etichette
+        \node at (2.5,0.4) [above] {$1$};
+        \node at (2.5,-0.4) [below] {$2$};
+
+        % Disegna i vertici
+        \filldraw (0,-1.1) circle (1.5pt) node[below] {$0$};
+        \filldraw (1.5,-1.1) circle (1.5pt) node[below] {$1$};
+        \filldraw (3.5,-1.1) circle (1.5pt) node[below] {$2$};
+        \filldraw (5,-1.1) circle (1.5pt) node[below] {$3$};
+    \end{tikzpicture}
+    \end{table}
+
+    Then, \(H^{trop}_{1 \to 0,3}((3)^2) = 2\).
+    
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%BIBLIOGRAFIA
+\clearpage{\pagestyle{empty}\cleardoublepage}
+\renewcommand{\chaptermark}[1]{\markright{\thechapter \ #1}{}}
+\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
+
+
+\begin{thebibliography}{90}
+	\rhead[\fancyplain{}{\bfseries \leftmark}]{\fancyplain{}{\bfseries
+			\thepage}}
+
+
+
+	\addcontentsline{toc}{chapter}{Bibliografia}
+
+
+
+    \bibitem[CM16]{CM16} Renzo Cavalieri, Eric Miles: \textit{Riemann Surfaces and Algebraic Curves: a first course in Hurwitz theory}, London Mathematical Society Student Texts, 87, Cambridge University Press, 2016.
+
+    \bibitem[Miranda95]{Miranda95} Rick Miranda: \textit{Algebraic Curves and Riemann Surfaces}, Graduate Studies in Mathematics, Vol.5, American Mathematical Society, 1995.
+
+    \bibitem[CJM10]{CJM10}
+     Renzo Cavalieri, Paul Johnson, and Hannah Markwig:
+     \textit{Tropical Hurwitz Numbers},
+     J. Algebraic Combinatorics, 32, 241--265, 2010.
+
+     \bibitem[Hatcher02]{Hatcher02} Allen Hatcher: \textit{Algebraic Topology}, Cambridge University Press, 2002.
+
+\end{thebibliography}
+
+\thispagestyle{empty}
+
+\end{document}
